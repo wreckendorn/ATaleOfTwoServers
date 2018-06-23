@@ -2,36 +2,41 @@
 var http = require("http");
 
 // Define a port to listen for incoming requests
-var PORT = 8080;
+var PORT = 7000;
 var PORT2 = 7500;
 
 // Create a generic function to handle requests and responses
-function handleRequest(request, response) {
+
+function goodRequest(request, response) {
 
   // Send the below string to the client when the user visits the PORT URL
-  response.end("It Works!! Path Hit: " + request.url);
+  response.end("You're looking great today, my man");
+}
+
+function badRequest(request, response) {
+
+  // Send the below string to the client when the user visits the PORT URL
+  response.end("My man, get your shit together.");
 }
 
 // Use the Node HTTP package to create our server.
 // Pass the handleRequest function to empower it with functionality.
-var goodServer = http.createServer(handleRequest);
+var goodServer = http.createServer(goodRequest);
 
 // Start our server so that it can begin listening to client requests.
 goodServer.listen(PORT, function() {
 
   // Log (server-side) when our server has started
   console.log("Server listening on: http://localhost:" + PORT);
-  console.log("You're looking great today, my man");
 });
 
-var badServer = http.createServer(handleRequest);
+var badServer = http.createServer(badRequest);
 
 // Start our server so that it can begin listening to client requests.
 badServer.listen(PORT2, function() {
 
   // Log (server-side) when our server has started
   console.log("Server listening on: http://localhost:" + PORT2);
-  console.log("My man, get your shit together.");
 });
 
 // Using the previous example as a guide, create an app that has two web servers.
